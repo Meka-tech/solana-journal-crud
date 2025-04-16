@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { useWallet } from '@solana/wallet-adapter-react'
-import { WalletButton } from '../solana/solana-provider'
-import { AppHero, ellipsify } from '../ui/ui-layout'
-import { ExplorerLink } from '../cluster/cluster-ui'
-import { useCrudappProgram } from './crudapp-data-access'
-import { CrudappCreate, CrudappList } from './crudapp-ui'
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletButton } from "../solana/solana-provider";
+import { AppHero, ellipsify } from "../ui/ui-layout";
+import { ExplorerLink } from "../cluster/cluster-ui";
+import { useCrudappProgram } from "./crudapp-data-access";
+import { JournalCreate, JournalList } from "./crudapp-ui";
 
 export default function CrudappFeature() {
-  const { publicKey } = useWallet()
-  const { programId } = useCrudappProgram()
+  const { publicKey } = useWallet();
+  const { programId } = useCrudappProgram();
 
   return publicKey ? (
     <div>
@@ -20,11 +20,14 @@ export default function CrudappFeature() {
         }
       >
         <p className="mb-6">
-          <ExplorerLink path={`account/${programId}`} label={ellipsify(programId.toString())} />
+          <ExplorerLink
+            path={`account/${programId}`}
+            label={ellipsify(programId.toString())}
+          />
         </p>
-        <CrudappCreate />
+        <JournalCreate />
       </AppHero>
-      <CrudappList />
+      <JournalList />
     </div>
   ) : (
     <div className="max-w-4xl mx-auto">
@@ -34,5 +37,5 @@ export default function CrudappFeature() {
         </div>
       </div>
     </div>
-  )
+  );
 }
